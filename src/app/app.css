@@ -1,0 +1,29 @@
+/* Root Component Styles */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+#smooth-wrapper {
+  min-height: 100dvh;
+}
+
+#smooth-content {
+  min-height: 100dvh;
+  will-change: transform;
+}
+
+.main-content {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease;
+}
+
+.main-content.app-ready {
+  opacity: 1;
+  visibility: visible;
+}

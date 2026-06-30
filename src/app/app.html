@@ -1,0 +1,10 @@
+<app-splash-screen />
+<app-cursor-follower />
+<main class="main-content" [class.app-ready]="splashDone()">
+  <app-navbar />
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <router-outlet />
+    </div>
+  </div>
+</main>

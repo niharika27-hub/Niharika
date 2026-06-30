@@ -1,0 +1,304 @@
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  PLATFORM_ID,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+  inject,
+  signal,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { achievementsData, type AchievementEntry } from '../../data/portfolio-data';
+
+@Component({
+  selector: 'app-achievements',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './achievements.component.html',
+  styles: [
+    `
+      /* ─── Timeline track (faint background rail) ───────────── */
+
+      .timeline-track {
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          rgba(192, 192, 192, 0.15),
+          rgba(128, 128, 128, 0.08),
+          transparent
+        );
+        border-radius: 999px;
+      }
+
+      /* ─── Timeline fill (animated draw line) ───────────────── */
+
+      .timeline-line-fill {
+        width: 2px;
+        border-radius: 999px;
+        transform-origin: top;
+        transform: scaleY(0);
+        will-change: transform;
+      }
+
+      /* ─── Timeline dot (node marker) ───────────────────────── */
+
+      .timeline-dot {
+        transition:
+          box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          background 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .timeline-dot.dot-active {
+        border-color: var(--color-metallic-silver) !important;
+        background: rgba(192, 192, 192, 0.6) !important;
+        box-shadow:
+          0 0 8px rgba(192, 192, 192, 0.4),
+          0 0 20px rgba(192, 192, 192, 0.15) !important;
+      }
+
+      /* ─── Card accent bar (top glow line) ──────────────────── */
+
+      .timeline-card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .timeline-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--color-metallic-silver),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .timeline-card.card-revealed::before {
+        opacity: 1;
+      }
+
+      /* ─── Text reveal (clip-path wipe) ─────────────────────── */
+
+      .text-reveal {
+        clip-path: inset(0 100% 0 0);
+      }
+
+      /* ─── Reduced motion ───────────────────────────────────── */
+
+      @media (prefers-reduced-motion: reduce) {
+        .timeline-line-fill {
+          transform: scaleY(1) !important;
+        }
+
+        .text-reveal {
+          clip-path: none !important;
+        }
+      }
+    `,
+  ],
+})
+export class AchievementsComponent implements AfterViewInit {
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
+  private scrollTriggers: ScrollTrigger[] = [];
+  private timelines: gsap.core.Timeline[] = [];
+
+  @ViewChild('timelineContainer') private timelineContainerRef?: ElementRef<HTMLDivElement>;
+  @ViewChild('timelineLineFill') private timelineLineFillRef?: ElementRef<HTMLDivElement>;
+  @ViewChildren('timelineItem', { read: ElementRef })
+  private timelineItemRefs?: QueryList<ElementRef<HTMLElement>>;
+  @ViewChildren('timelineDot', { read: ElementRef })
+  private timelineDotRefs?: QueryList<ElementRef<HTMLElement>>;
+
+  protected readonly achievements = signal<AchievementEntry[]>(achievementsData);
+
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Wait for Angular hydration + paint to stabilize
+    setTimeout(() => {
+      this.initAnimations();
+    }, 100);
+
+    this.destroyRef.onDestroy(() => {
+      this.timelines.forEach((tl) => tl.kill());
+      this.scrollTriggers.forEach((st) => st.kill());
+    });
+  }
+
+  private initAnimations(): void {
+    // Set initial states via GSAP (reliable across SSR hydration)
+    const items = this.timelineItemRefs?.toArray() ?? [];
+    items.forEach((ref) => {
+      const el = ref.nativeElement;
+      gsap.set(el, { autoAlpha: 0, y: 40 });
+
+      const bullets = el.querySelectorAll('.bullet-item');
+      const tags = el.querySelectorAll('.tag-item');
+      const texts = el.querySelectorAll('.text-reveal');
+
+      gsap.set(bullets, { autoAlpha: 0, x: -16 });
+      gsap.set(tags, { autoAlpha: 0, scale: 0.8 });
+      gsap.set(texts, { clipPath: 'inset(0 100% 0 0)' });
+    });
+
+    this.setupTimelineProgress();
+    this.setupTimelineItemReveal();
+    ScrollTrigger.refresh();
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  //  Timeline line "drawing" + dot activation with smooth scrolling
+  // ═══════════════════════════════════════════════════════════════
+  private setupTimelineProgress(): void {
+    const container = this.timelineContainerRef?.nativeElement;
+    const lineFill = this.timelineLineFillRef?.nativeElement;
+    if (!container || !lineFill) return;
+
+    // Pin the section and create smooth scroll experience
+    const st = ScrollTrigger.create({
+      trigger: container,
+      start: 'top 65%',
+      end: 'bottom 20%',
+      scrub: 1.5, // Smoother scrub for a more enjoyable experience
+      animation: gsap.fromTo(lineFill, { scaleY: 0 }, { scaleY: 1, ease: 'none' }),
+      onUpdate: (self) => this.updateDotActivation(self.progress),
+    });
+
+    this.scrollTriggers.push(st);
+  }
+
+  private updateDotActivation(progress: number): void {
+    const dots = this.timelineDotRefs?.toArray() ?? [];
+    const items = this.timelineItemRefs?.toArray() ?? [];
+    const container = this.timelineContainerRef?.nativeElement;
+    if (!container || dots.length === 0) return;
+
+    const containerHeight = container.scrollHeight;
+    const lineDrawnHeight = progress * containerHeight;
+
+    dots.forEach((dotRef, i) => {
+      const itemEl = items[i]?.nativeElement;
+      if (!itemEl) return;
+
+      const dotOffset = itemEl.offsetTop - container.offsetTop;
+      if (lineDrawnHeight >= dotOffset) {
+        dotRef.nativeElement.classList.add('dot-active');
+      } else {
+        dotRef.nativeElement.classList.remove('dot-active');
+      }
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  //  Timeline item reveal — card + text wipe + bullets + tags
+  //  with smooth scroll-triggered animations
+  // ═══════════════════════════════════════════════════════════════
+  private setupTimelineItemReveal(): void {
+    const items = this.timelineItemRefs?.toArray() ?? [];
+    if (items.length === 0) return;
+
+    items.forEach((itemRef, index) => {
+      const el = itemRef.nativeElement;
+      const card = el.querySelector('.timeline-card') as HTMLElement | null;
+      const textReveals = el.querySelectorAll('.text-reveal');
+      const bullets = el.querySelectorAll('.bullet-item');
+      const tags = el.querySelectorAll('.tag-item');
+
+      // Build a per-card timeline with smooth scroll-linked animation
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 80%',
+          end: 'top 40%',
+          scrub: 1.2, // Smooth scrub for enjoyable experience
+          toggleActions: 'play none none reverse',
+        },
+        defaults: { ease: 'power3.out' },
+      });
+
+      // 1. Card entrance (fade + slide up)
+      tl.fromTo(el, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 0);
+
+      // 2. Top accent bar glow
+      if (card) {
+        tl.add(() => card.classList.add('card-revealed'), 0.4);
+      }
+
+      // 3. Text reveal wipe (left -> right)
+      if (textReveals.length > 0) {
+        tl.fromTo(
+          textReveals,
+          { clipPath: 'inset(0 100% 0 0)' },
+          {
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 0.7,
+            ease: 'power2.inOut',
+            stagger: 0.12,
+          },
+          0.25,
+        );
+      }
+
+      // 4. Bullet items stagger
+      if (bullets.length > 0) {
+        tl.fromTo(
+          bullets,
+          { autoAlpha: 0, x: -16 },
+          {
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            stagger: 0.08,
+          },
+          0.5,
+        );
+      }
+
+      // 5. Tag pills pop-in
+      if (tags.length > 0) {
+        tl.fromTo(
+          tags,
+          { autoAlpha: 0, scale: 0.8 },
+          {
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.4,
+            ease: 'back.out(2)',
+            stagger: 0.06,
+          },
+          0.7,
+        );
+      }
+
+      this.timelines.push(tl);
+
+      // Separate trigger for card glow removal on scroll back
+      const cardGlowSt = ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        onLeaveBack: () => {
+          card?.classList.remove('card-revealed');
+        },
+      });
+
+      this.scrollTriggers.push(cardGlowSt);
+    });
+  }
+}
