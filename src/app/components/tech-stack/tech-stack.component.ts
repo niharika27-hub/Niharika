@@ -13,7 +13,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { techStackData, type TechItem } from '../../data/portfolio-data';
+import { pageContent, techStackData, type TechItem } from '../../data/portfolio-data';
 
 @Component({
   selector: 'app-tech-stack',
@@ -46,7 +46,7 @@ import { techStackData, type TechItem } from '../../data/portfolio-data';
               <polyline points="8 6 2 12 8 18" />
             </svg>
           </span>
-          Tech Stack
+          {{ content.title }}
         </h2>
 
         <!-- Tech Grid -->
@@ -62,7 +62,7 @@ import { techStackData, type TechItem } from '../../data/portfolio-data';
             >
               <img
                 [src]="tech.icon"
-                [alt]="tech.name + ' logo'"
+                [alt]="tech.name + ' ' + content.logoAltSuffix"
                 class="w-10 h-10 object-contain"
                 loading="lazy"
               />
@@ -132,6 +132,7 @@ export class TechStackComponent implements AfterViewInit {
   private cardRefs?: QueryList<ElementRef<HTMLElement>>;
 
   protected readonly techStack = signal<TechItem[]>(techStackData);
+  protected readonly content = pageContent.techStack;
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;

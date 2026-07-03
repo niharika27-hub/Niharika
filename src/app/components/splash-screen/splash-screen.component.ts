@@ -10,6 +10,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 import { SplashService } from '../../services/splash.service';
+import { pageContent } from '../../data/portfolio-data';
 
 interface SplashLetter {
   char: string;
@@ -27,19 +28,20 @@ interface SplashLetter {
 export class SplashScreenComponent implements OnInit, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly splashService = inject(SplashService);
+  private readonly splashContent = pageContent.splash;
 
   // Timing configuration
-  private readonly revealDelay = 150; // ms between letters
-  private readonly cursorDuration = 300; // ms cursor blinks per letter
-  private readonly totalDuration = 2000; // Fixed 2 second minimum duration
-  private readonly fadeDuration = 600; // Fade out duration
+  private readonly revealDelay = this.splashContent.revealDelayMs;
+  private readonly cursorDuration = this.splashContent.cursorDurationMs;
+  private readonly totalDuration = this.splashContent.totalDurationMs;
+  private readonly fadeDuration = this.splashContent.fadeDurationMs;
 
   protected readonly isVisible = signal(true);
   protected readonly isHiding = signal(false);
   protected readonly isPulse = signal(false);
   protected readonly letters = signal<SplashLetter[]>([]);
 
-  private readonly baseName = ['A', 'D', 'I', 'T', 'Y', 'A'];
+  private readonly baseName = this.splashContent.name.split('');
   private readonly timeouts: number[] = [];
   private animationComplete = false;
 

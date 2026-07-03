@@ -14,7 +14,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { achievementsData, type AchievementEntry } from '../../data/portfolio-data';
+import { achievementsData, pageContent, type AchievementEntry } from '../../data/portfolio-data';
 
 @Component({
   selector: 'app-achievements',
@@ -124,6 +124,7 @@ export class AchievementsComponent implements AfterViewInit {
   private timelineDotRefs?: QueryList<ElementRef<HTMLElement>>;
 
   protected readonly achievements = signal<AchievementEntry[]>(achievementsData);
+  protected readonly content = pageContent.achievements;
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;

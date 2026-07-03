@@ -14,6 +14,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { filter } from 'rxjs';
+import { pageContent } from '../../data/portfolio-data';
 
 type SectionId =
   | 'about'
@@ -40,9 +41,9 @@ type SectionId =
         <button
           class="brand-logo shrink-0"
           (click)="scrollToSection('about')"
-          aria-label="Go to top"
+          [attr.aria-label]="nav.brandAriaLabel"
         >
-          <img src="assets/images/logo.png" alt="Aditya logo" class="brand-logo-image" />
+          <img src="assets/images/logo.png" alt="Niharika logo" class="brand-logo-image" />
         </button>
         <nav class="hidden items-center gap-6 lg:flex lg:ml-auto lg:mr-auto">
           <button
@@ -50,59 +51,59 @@ type SectionId =
             [class.nav-link-active]="activeSection() === 'about'"
             (click)="scrollToSection('about')"
           >
-            About
+            {{ nav.links[0].label }}
           </button>
           <button
             class="nav-link"
             [class.nav-link-active]="activeSection() === 'experience'"
             (click)="scrollToSection('experience')"
           >
-            Experience
+            {{ nav.links[1].label }}
           </button>
           <button
             class="nav-link"
             [class.nav-link-active]="activeSection() === 'projects'"
             (click)="scrollToSection('projects')"
           >
-            Projects
+            {{ nav.links[2].label }}
           </button>
           <button
             class="nav-link"
             [class.nav-link-active]="activeSection() === 'tech'"
             (click)="scrollToSection('tech')"
           >
-            Tech Stack
+            {{ nav.links[3].label }}
           </button>
           <button
             class="nav-link"
             [class.nav-link-active]="activeSection() === 'problem-solving'"
             (click)="scrollToSection('problem-solving')"
           >
-            Contributions
+            {{ nav.links[4].label }}
           </button>
           <button
             class="nav-link"
             [class.nav-link-active]="activeSection() === 'education'"
             (click)="scrollToSection('education')"
           >
-            Education
+            {{ nav.links[5].label }}
           </button>
           <button
             class="nav-link"
             [class.nav-link-active]="activeSection() === 'achievements'"
             (click)="scrollToSection('achievements')"
           >
-            Achievements
+            {{ nav.links[6].label }}
           </button>
         </nav>
 
         <button class="ml-auto nav-cta hidden lg:inline-flex" (click)="scrollToSection('contact')">
-          Get in Touch
+          {{ nav.cta.label }}
         </button>
 
         <button
           class="ml-auto flex h-9 w-9 items-center justify-center lg:hidden"
-          aria-label="Toggle menu"
+          [attr.aria-label]="nav.mobileToggleAriaLabel"
           (click)="toggleMenu()"
         >
           <div class="relative h-4 w-6">
@@ -130,27 +131,29 @@ type SectionId =
         [class.mobile-menu-open]="mobileMenuVisible()"
       >
         <nav class="mx-4 mb-4 flex flex-col gap-1 rounded-2xl p-4 mobile-menu-inner">
-          <button class="mobile-link" (click)="scrollToSection('about'); closeMenu()">About</button>
+          <button class="mobile-link" (click)="scrollToSection('about'); closeMenu()">
+            {{ nav.links[0].label }}
+          </button>
           <button class="mobile-link" (click)="scrollToSection('experience'); closeMenu()">
-            Experience
+            {{ nav.links[1].label }}
           </button>
           <button class="mobile-link" (click)="scrollToSection('projects'); closeMenu()">
-            Projects
+            {{ nav.links[2].label }}
           </button>
           <button class="mobile-link" (click)="scrollToSection('tech'); closeMenu()">
-            Tech Stack
+            {{ nav.links[3].label }}
           </button>
           <button class="mobile-link" (click)="scrollToSection('problem-solving'); closeMenu()">
-            Contributions
+            {{ nav.links[4].label }}
           </button>
           <button class="mobile-link" (click)="scrollToSection('education'); closeMenu()">
-            Education
+            {{ nav.links[5].label }}
           </button>
           <button class="mobile-link" (click)="scrollToSection('achievements'); closeMenu()">
-            Achievements
+            {{ nav.links[6].label }}
           </button>
           <button class="mobile-link-cta" (click)="scrollToSection('contact'); closeMenu()">
-            Get in Touch
+            {{ nav.cta.label }}
           </button>
         </nav>
       </div>
@@ -356,6 +359,7 @@ export class NavbarComponent implements AfterViewInit {
   ];
 
   protected readonly activeSection = signal<SectionId>('about');
+  protected readonly nav = pageContent.navigation;
   protected readonly isScrolled = signal(false);
   protected readonly isMobileMenuOpen = signal(false);
   protected readonly mobileMenuVisible = signal(false);

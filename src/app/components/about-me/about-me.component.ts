@@ -72,8 +72,9 @@ import { aboutData } from '../../data/portfolio-data';
 export class AboutMeComponent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
 
-  protected readonly greeting = signal('Good evening');
-  protected readonly resumeUrl = aboutData.resumeUrl;
+  protected readonly about = aboutData;
+  protected readonly greeting = signal(aboutData.greetingFallback);
+  protected readonly resumeUrl = aboutData.resume.url;
   protected readonly socialLinks = signal<DockItem[]>(aboutData.socialLinks);
 
   ngOnInit(): void {

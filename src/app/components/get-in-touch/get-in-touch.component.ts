@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID, signal } from 
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { contactData, portfolioData } from '../../data/portfolio-data';
+import { contactData, pageContent, portfolioData } from '../../data/portfolio-data';
 
 @Component({
   selector: 'app-get-in-touch',
@@ -38,10 +38,10 @@ import { contactData, portfolioData } from '../../data/portfolio-data';
                 <polyline points="22,6 12,13 2,6" />
               </svg>
             </span>
-            Get In Touch
+            {{ contactPage.title }}
           </h2>
           <p class="text-metallic-silver/70 text-lg">
-            {{ contactDataIntro }}
+            {{ contactPage.subtitle }}
           </p>
         </div>
 
@@ -49,9 +49,11 @@ import { contactData, portfolioData } from '../../data/portfolio-data';
           <!-- Contact Info -->
           <div class="space-y-6">
             <div>
-              <h3 class="text-2xl font-semibold mb-4 text-metallic-silver">Let's Connect</h3>
+              <h3 class="text-2xl font-semibold mb-4 text-metallic-silver">
+                {{ contactPage.infoTitle }}
+              </h3>
               <p class="text-metallic-silver/70 mb-6">
-                {{ contactDataAbout }}
+                {{ contactPage.description }}
               </p>
             </div>
 
@@ -72,8 +74,8 @@ import { contactData, portfolioData } from '../../data/portfolio-data';
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-metallic-silver/60">Email</p>
-                  <p class="text-metallic-silver">{{ contactEmail }}</p>
+                  <p class="text-sm text-metallic-silver/60">{{ contactPage.details[0].label }}</p>
+                  <p class="text-metallic-silver">{{ contactPage.details[0].value }}</p>
                 </div>
               </div>
 
@@ -91,8 +93,8 @@ import { contactData, portfolioData } from '../../data/portfolio-data';
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-metallic-silver/60">Location</p>
-                  <p class="text-metallic-silver">{{ contactLocation }}</p>
+                  <p class="text-sm text-metallic-silver/60">{{ contactPage.details[1].label }}</p>
+                  <p class="text-metallic-silver">{{ contactPage.details[1].value }}</p>
                 </div>
               </div>
 
@@ -110,8 +112,8 @@ import { contactData, portfolioData } from '../../data/portfolio-data';
                   </svg>
                 </div>
                 <div>
-                  <p class="text-sm text-metallic-silver/60">Response Time</p>
-                  <p class="text-metallic-silver">{{ contactResponseTime }}</p>
+                  <p class="text-sm text-metallic-silver/60">{{ contactPage.details[2].label }}</p>
+                  <p class="text-metallic-silver">{{ contactPage.details[2].value }}</p>
                 </div>
               </div>
             </div>
@@ -123,69 +125,73 @@ import { contactData, portfolioData } from '../../data/portfolio-data';
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
                   <label for="firstName" class="block text-sm font-medium mb-2 text-zinc-300">
-                    First Name <span class="text-red-500">*</span>
+                    {{ contactPage.form.labels['firstName'] }}
+                    <span class="text-red-500">{{ contactPage.form.requiredMark }}</span>
                   </label>
                   <input
                     type="text"
                     id="firstName"
                     formControlName="firstName"
                     class="contact-input"
-                    placeholder="Your first name"
+                    [placeholder]="contactPage.form.placeholders['firstName']"
                   />
                 </div>
                 <div>
                   <label for="lastName" class="block text-sm font-medium mb-2 text-zinc-300">
-                    Last Name <span class="text-red-500">*</span>
+                    {{ contactPage.form.labels['lastName'] }}
+                    <span class="text-red-500">{{ contactPage.form.requiredMark }}</span>
                   </label>
                   <input
                     type="text"
                     id="lastName"
                     formControlName="lastName"
                     class="contact-input"
-                    placeholder="Your last name"
+                    [placeholder]="contactPage.form.placeholders['lastName']"
                   />
                 </div>
               </div>
 
               <div>
                 <label for="email" class="block text-sm font-medium mb-2 text-zinc-300">
-                  Email <span class="text-red-500">*</span>
+                  {{ contactPage.form.labels['email'] }}
+                  <span class="text-red-500">{{ contactPage.form.requiredMark }}</span>
                 </label>
                 <input
                   type="email"
                   id="email"
                   formControlName="email"
                   class="contact-input"
-                  placeholder="your.email@example.com"
+                  [placeholder]="contactPage.form.placeholders['email']"
                 />
               </div>
 
               <div>
                 <label for="subject" class="block text-sm font-medium mb-2 text-zinc-300">
-                  Subject <span class="text-red-500">*</span>
+                  {{ contactPage.form.labels['subject'] }}
+                  <span class="text-red-500">{{ contactPage.form.requiredMark }}</span>
                 </label>
                 <select id="subject" formControlName="subject" class="contact-input contact-select">
-                  <option value="">Select a subject</option>
-                  <option value="project-inquiry">Project Inquiry</option>
-                  <option value="job-opportunity">Job Opportunity</option>
-                  <option value="collaboration">Collaboration</option>
-                  <option value="general">General Message</option>
+                  <option value="">{{ contactPage.form.subjectPlaceholder }}</option>
+                  @for (subject of contactPage.form.subjects; track subject.value) {
+                    <option [value]="subject.value">{{ subject.label }}</option>
+                  }
                 </select>
               </div>
 
               <div>
                 <label for="message" class="block text-sm font-medium mb-2 text-zinc-300">
-                  Message <span class="text-red-500">*</span>
+                  {{ contactPage.form.labels['message'] }}
+                  <span class="text-red-500">{{ contactPage.form.requiredMark }}</span>
                 </label>
                 <textarea
                   id="message"
                   formControlName="message"
                   rows="5"
                   class="contact-input resize-none"
-                  placeholder="Tell me about your project or how I can help you..."
+                  [placeholder]="contactPage.form.placeholders['message']"
                 ></textarea>
                 <p class="text-xs text-zinc-400 mt-1">
-                  💡 Tip: Write a meaningful message with at least 3 words and 10 characters.
+                  {{ contactPage.form.tip }}
                 </p>
               </div>
 
@@ -211,10 +217,10 @@ import { contactData, portfolioData } from '../../data/portfolio-data';
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       ></path>
                     </svg>
-                    Sending...
+                    {{ contactPage.form.sendingLabel }}
                   </span>
                 } @else {
-                  Send Message
+                  {{ contactPage.form.submitLabel }}
                 }
               </button>
             </form>
@@ -339,11 +345,7 @@ export class GetInTouchComponent {
   protected readonly isSubmitting = signal(false);
   protected readonly formStatus = signal<'success' | 'error' | null>(null);
   protected readonly formMessage = signal('');
-  protected readonly contactDataIntro = contactData.intro;
-  protected readonly contactDataAbout = contactData.about;
-  protected readonly contactEmail = contactData.email;
-  protected readonly contactLocation = contactData.location;
-  protected readonly contactResponseTime = contactData.responseTime;
+  protected readonly contactPage = pageContent.contact;
 
   protected readonly contactForm: FormGroup = this.fb.group({
     firstName: ['', [Validators.required, Validators.minLength(2)]],

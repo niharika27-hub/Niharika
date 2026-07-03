@@ -13,7 +13,7 @@ import {
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { personalProjectsData, type PersonalProject } from '../../data/portfolio-data';
+import { pageContent, personalProjectsData, type PersonalProject } from '../../data/portfolio-data';
 
 @Component({
   selector: 'app-personal-projects',
@@ -214,7 +214,7 @@ import { personalProjectsData, type PersonalProject } from '../../data/portfolio
           line-height: 1.5;
         }
 
-        .flip-card-back .space-y-2\.5 > * + * {
+        .flip-card-back .space-y-2\\.5 > * + * {
           margin-top: 0.4rem;
         }
       }
@@ -258,6 +258,7 @@ export class PersonalProjectsComponent implements AfterViewInit {
   private techTagRefs?: QueryList<ElementRef<HTMLElement>>;
 
   protected readonly projects = signal<PersonalProject[]>(personalProjectsData);
+  protected readonly content = pageContent.projects;
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;

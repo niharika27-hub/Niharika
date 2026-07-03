@@ -14,7 +14,7 @@ import {
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { experienceData, type ExperienceEntry } from '../../data/portfolio-data';
+import { experienceData, pageContent, type ExperienceEntry } from '../../data/portfolio-data';
 
 @Component({
   selector: 'app-experience',
@@ -309,6 +309,7 @@ export class ExperienceComponent implements AfterViewInit {
   private techTagRefs?: QueryList<ElementRef<HTMLElement>>;
 
   protected readonly experiences = signal<ExperienceEntry[]>(experienceData);
+  protected readonly content = pageContent.experience;
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;

@@ -14,7 +14,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { educationData, type EducationEntry } from '../../data/portfolio-data';
+import { educationData, pageContent, type EducationEntry } from '../../data/portfolio-data';
 
 @Component({
   selector: 'app-education',
@@ -72,6 +72,7 @@ export class EducationComponent implements AfterViewInit {
   private cardRefs?: QueryList<ElementRef<HTMLElement>>;
 
   protected readonly education = signal<EducationEntry[]>(educationData);
+  protected readonly content = pageContent.education;
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;

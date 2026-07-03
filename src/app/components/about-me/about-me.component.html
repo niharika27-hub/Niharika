@@ -20,8 +20,8 @@
           "
         >
           <img
-            src="assets/images/profile.webp"
-            alt="Niharika khosla"
+            [src]="about.image.src"
+            [alt]="about.image.alt"
             width="800"
             height="800"
             loading="eager"
@@ -46,7 +46,7 @@
         >
           <span
             class="font-mono text-xs font-medium text-accent-teal-light tracking-wide before:content-['>'] before:mr-1.5 before:text-text-muted"
-            >npm run dev</span
+            >{{ about.codeSnippets[0] }}</span
           >
         </div>
         <div
@@ -59,7 +59,7 @@
         >
           <span
             class="font-mono text-xs font-medium text-accent-teal-light tracking-wide before:content-['>'] before:mr-1.5 before:text-text-muted"
-            >const dev = true</span
+            >{{ about.codeSnippets[1] }}</span
           >
         </div>
       </div>
@@ -69,35 +69,32 @@
     <div class="flex flex-col min-w-0">
       <!-- Greeting -->
       <span class="font-label text-sm font-medium text-accent-teal-light tracking-wider mb-4">
-        {{ greeting() }} —
+        {{ greeting() }} {{ about.greetingSuffix }}
       </span>
 
       <!-- Name -->
       <h1
         class="name-reveal font-heading text-display font-bold leading-[1.1] -tracking-[0.03em] mb-3"
       >
-        Aditya Poojary
+        {{ about.name }}
       </h1>
 
       <!-- Role -->
       <h2 class="font-heading text-h3 font-medium text-metallic-silver mb-8">
-        Full Stack Developer
+        {{ about.role }}
       </h2>
 
       <!-- Bio -->
       <p
         class="font-body text-base font-normal leading-loose text-text-secondary max-w-[520px] max-md:max-w-full"
       >
-        I love building stuff that actually works. Problem solving is my thing — give me a pain
-        point and I'll ship a clean, functional solution for it. Not here to write code that just
-        "runs." I build things that reduce friction, cut the noise, and make life easier for the
-        people using them.
+        {{ about.bio[0] }}
       </p>
 
       <p
         class="font-body text-sm font-normal text-text-muted italic mt-6 max-w-[520px] max-md:max-w-full"
       >
-        Clean code. Functional apps. Less pain points. That's the whole vibe.
+        {{ about.bio[1] }}
       </p>
 
       <!-- Resume + Contact Dock (same row) -->
@@ -142,7 +139,7 @@
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          Resume
+          {{ about.resume.label }}
         </a>
 
         <!-- Floating Dock (fixed-height wrapper prevents layout shift on hover) -->
