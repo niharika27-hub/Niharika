@@ -11,7 +11,7 @@
         "alt": "Niharika logo"
       },
       "profileImage": {
-        "src": "assets/images/profile.webp",
+        "src": "assets/images/myphoto.webp",
         "alt": "Niharika Khosla"
       }
     }
@@ -61,7 +61,7 @@
       "name": "Niharika Khosla",
       "role": "Full Stack Developer",
       "image": {
-        "src": "assets/images/profile.webp",
+        "src": "assets/images/myphoto.webp",
         "alt": "Niharika Khosla"
       },
       "codeSnippets": [
