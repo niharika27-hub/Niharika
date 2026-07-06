@@ -123,7 +123,7 @@ export interface SiteContent {
       greetingFallback: string;
       greetingSuffix: string;
     };
-    experience: {
+    experience?: {
       sectionId: string;
       title: string;
       dateSeparator: string;
@@ -235,14 +235,14 @@ export const pageContent = siteContent.pages;
 export const portfolioData = {
   meta: siteContent.site.meta,
   about: pageContent.about,
-  experience: pageContent.experience.entries,
+  experience: pageContent.experience?.entries ?? [],
   projects: pageContent.projects.items,
   techStack: pageContent.techStack.items,
   education: pageContent.education.entries,
   achievements: pageContent.achievements.entries,
 } as PortfolioData;
 export const aboutData = pageContent.about;
-export const experienceData = pageContent.experience.entries;
+export const experienceData = pageContent.experience?.entries ?? [];
 export const personalProjectsData = pageContent.projects.items;
 export const techStackData = pageContent.techStack.items;
 export const educationData = pageContent.education.entries;

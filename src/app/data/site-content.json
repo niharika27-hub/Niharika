@@ -33,20 +33,12 @@
           "label": "About"
         },
         {
-          "id": "experience",
-          "label": "Experience"
-        },
-        {
           "id": "projects",
           "label": "Projects"
         },
         {
           "id": "tech",
           "label": "Tech Stack"
-        },
-        {
-          "id": "problem-solving",
-          "label": "Contributions"
         },
         {
           "id": "education",
@@ -77,9 +69,11 @@
         "const dev = true"
       ],
       "bio": [
-        "I love building stuff that actually works. Problem solving is my thing - give me a pain point and I will ship a clean, functional solution for it. Not here to write code that just runs. I build things that reduce friction, cut the noise, and make life easier for the people using them.",
-        "Clean code. Functional apps. Less pain points. That is the whole vibe."
-      ],
+  "Hi, I'm a 3rd-year CSE student, freelance Full-Stack Developer, and an enthusiastic problem solver. I love creating modern web applications that combine clean design, solid engineering, and exceptional user experiences.",
+  "My journey goes beyond building interfaces—I'm equally passionate about Data Structures & Algorithms, backend development, and writing scalable, efficient code that performs under the hood.",
+  "Every project I build has one goal: make technology feel simple, useful, and effortless.",
+  "Code with clarity. Design with intention. Build for impact."
+],
       "resume": {
         "label": "Resume",
         "url": "https://drive.google.com/file/d/1L_FpPqGa3MQidPrRTqUMr-tAUxmMJZmn/view?usp=sharing"
@@ -87,7 +81,7 @@
       "socialLinks": [
         {
           "title": "LinkedIn",
-          "href": "https://www.linkedin.com/in/niharika-khosla-/",
+          "href": "https://www.linkedin.com/in/niharika-khosla-95357b333/",
           "icon": "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
         },
         {
@@ -97,87 +91,19 @@
         },
         {
           "title": "GitHub",
-          "href": "https://github.com/niharikakhosla/",
+          "href": "https://github.com/niharika27-hub",
           "icon": "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
         },
-        {
-          "title": "X",
-          "href": "https://x.com/adityapoojaryO7",
-          "icon": "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-        },
+        
+  
         {
           "title": "Discord",
-          "href": "https://discord.com/users/815850447218802718",
+          "href": "https://discord.gg/a9AvTrDJD",
           "icon": "M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"
         }
       ]
     },
-    "experience": {
-      "sectionId": "experience",
-      "title": "Experience",
-      "dateSeparator": "-",
-      "githubLabel": "View on GitHub",
-      "githubShortLabel": "GitHub",
-      "liveLabel": "Live Site",
-      "liveShortLabel": "Live",
-      "entries": [
-        {
-          "company": "Cortex Dynamics",
-          "startDate": "Dec 2024",
-          "endDate": "Mar 2025",
-          "projects": [
-            {
-              "title": "Cortex Dynamics â€” Portfolio Platform",
-              "description": "Enterprise SaaS platform delivering AI-powered business solutions with real-time data management, intuitive dashboard, and modern responsive design across devices.",
-              "techStack": [
-                "React",
-                "Firebase",
-                "Tailwind CSS",
-                "Vite"
-              ],
-              "githubUrl": "https://github.com/kavin-cmd/Updated_CortexDynamics",
-              "liveUrl": "https://www.cortexdynamics.in/",
-              "imageUrl": "assets/images/cortexdynamics.webp",
-              "imageAlt": "Cortex Dynamics portfolio page â€” enterprise SaaS dashboard"
-            },
-            {
-              "title": "Spotify Web Player â€” Custom SDK",
-              "description": "Custom Spotify Web Player with real-time playback, drag-to-seek progress, and seamless track navigation. Integrated Spotify Web Playback SDK with OAuth 2.0 auth, device management, and dynamic UI updates for smooth multi-device playback.",
-              "techStack": [
-                "Next.js",
-                "TypeScript",
-                "Shadcn",
-                "Spotify SDK"
-              ],
-              "githubUrl": "https://github.com/kavin-cmd/MeloDash",
-              "imageUrl": "assets/images/melodash.webp",
-              "imageAlt": "Spotify Web Player â€” custom SDK integration with real-time playback"
-            }
-          ]
-        },
-        {
-          "company": "Gogo Energy",
-          "startDate": "Mar 2025",
-          "endDate": "Jun 2025",
-          "projects": [
-            {
-              "title": "GoGo Energy â€” Company Portfolio",
-              "description": "Modern portfolio website built with Next.js 15 and TypeScript, featuring advanced SEO with Open Graph, Twitter Cards, and JSON-LD structured data. Animated UI powered by Framer Motion with Material-UI and Tailwind CSS.",
-              "techStack": [
-                "Next.js",
-                "TypeScript",
-                "Framer Motion",
-                "MUI"
-              ],
-              "githubUrl": "https://github.com/aditya-poojary/Gogo",
-              "liveUrl": "https://gogoenergy.in/",
-              "imageUrl": "assets/images/gogoenergy.webp",
-              "imageAlt": "GoGo Energy company portfolio website"
-            }
-          ]
-        }
-      ]
-    },
+
     "projects": {
       "sectionId": "projects",
       "title": "Personal Projects",
@@ -188,49 +114,54 @@
       "liveLabel": "Live",
       "items": [
         {
-          "title": "PlacePicker",
-          "description": "Discover nearby tourist hotspots with geolocation-based sorting and personal collections.",
+          "title": "SkillConnect",
+          "description": "AI-powered team formation platform that intelligently matches users based on skills, interests, and domain expertise. Built to generate high-quality team recommendations for hackathons and projects.",
           "features": [
-            "Geolocation-based place sorting by distance",
-            "Personal collection with optimistic updates",
-            "Cloudinary CDN for optimized images",
-            "Custom useFetch hook for data management",
-            "Modal dialogs with timed progress indicators"
+            "AI-powered recommendation engine",
+            "Skill & interest matching",
+            "Backend recommendation logic and database integration",
+            "Deployed prototype for live demos"
           ],
-          "techStack": [
-            "React",
-            "Vite",
-            "Node.js",
-            "Express",
-            "Cloudinary"
-          ],
-          "githubUrl": "https://github.com/aditya-poojary/Tourist-Hotspot-Finder",
-          "liveUrl": "https://tourist-hotspot-finder-final.vercel.app/",
-          "imageUrl": "assets/images/tourist.webp",
-          "imageAlt": "PlacePicker - Tourist Hotspot Finder application"
+          "techStack": ["React", "Node.js", "Express", "Tailwind CSS"],
+          "githubUrl": "",
+          "liveUrl": "https://skill-connect-klyo.vercel.app/",
+          "imageUrl": "assets/images/skillconnect.webp",
+          "imageAlt": "SkillConnect — AI Team Formation Platform"
         },
         {
-          "title": "Momentum",
-          "description": "Full-featured project management app with visual progress tracking and calendar scheduling.",
+          "title": "SeedShare",
+          "description": "AgriTech resource sharing platform to help farmers exchange seeds and resources efficiently. Implemented listings, requests, and secure user communication as part of a hackathon prototype.",
           "features": [
-            "Project CRUD with trash/restore functionality",
-            "Visual progress charts using Recharts",
-            "Weekly calendar planner & scheduling",
-            "Firebase Auth with protected routes",
-            "User-specific Firestore data collections"
+            "Resource listings and requests",
+            "User-to-user communication",
+            "Simple verification flows for resource providers"
           ],
-          "techStack": [
-            "React",
-            "Vite",
-            "Tailwind CSS",
-            "Firebase",
-            "Redux",
-            "Recharts"
-          ],
-          "githubUrl": "https://github.com/aditya-poojary/Momentum",
-          "liveUrl": "https://momentum-b275f.web.app/",
-          "imageUrl": "assets/images/momentum.webp",
-          "imageAlt": "Momentum - Project Management application"
+          "techStack": ["React", "Node.js", "Express"],
+          "githubUrl": "https://github.com/chetan-s20/SeedShare",
+          "liveUrl": "https://lnkd.in/e28JncwK",
+          "imageUrl": "assets/images/seedshare.webp",
+          "imageAlt": "SeedShare — AgriTech Resource Sharing Platform"
+        },
+        {
+          "title": "CU Bot",
+          "description": "Chitkara University chatbot project (CU Bot) for campus help and automation. See project listing on Vercel for demos and deployments.",
+          "features": ["Conversational helpers", "Campus information retrieval", "Integration with university resources"],
+          "techStack": ["Next.js", "Node.js"],
+          "githubUrl": "https://github.com/niharika27-hub/chatbot",
+          "liveUrl": "https://vercel.com/niharikakhoslas-projects",
+          "imageUrl": "assets/images/cubot.webp",
+          "imageAlt": "CU Bot — Chitkara University"
+        }
+        ,
+        {
+          "title": "Yuveda",
+          "description": "A deployed project showcasing a wellness/health related site (Yuveda).",
+          "features": ["Responsive UI", "Content-driven pages", "Fast deployment on Vercel"],
+          "techStack": ["Next.js", "React"],
+          "githubUrl": "https://github.com/niharika27-hub/yuveda",
+          "liveUrl": "https://yuveda.vercel.app/",
+          "imageUrl": "assets/images/yuveda.webp",
+          "imageAlt": "Yuveda — Live Project"
         }
       ]
     },
@@ -376,22 +307,16 @@
       "stepPrefix": "0",
       "entries": [
         {
-          "period": "2013 â€” 2020",
-          "title": "St. Thomas High School",
+          "period": "Graduated 2024",
+          "title": "DAV School, Phillaur",
           "subtitle": "Primary & Secondary Education",
-          "description": ""
+          "description": "Passed out in 2024"
         },
         {
-          "period": "2020 â€” 2022",
-          "title": "Yashodham Junior College",
-          "subtitle": "Higher Secondary Education",
-          "description": ""
-        },
-        {
-          "period": "2022 â€” Present",
-          "title": "Thakur College of Engineering & Technology",
-          "subtitle": "B.E. â€” Information Technology",
-          "description": "Mumbai University | Graduation year: 2026"
+          "period": "2024 â€” 2028",
+          "title": "Chitkara University, Punjab",
+          "subtitle": "B.E. — Information Technology",
+          "description": "Expected graduation: 2028"
         }
       ]
     },
@@ -400,42 +325,18 @@
       "title": "Achievements",
       "entries": [
         {
-          "period": "Feb 2025",
-          "title": "Global Hyperloop Competition",
-          "subtitle": "IIT Madras â€” Propulsion Engineer",
-          "description": "Represented the team at the Global Hyperloop Competition hosted by the Indian Institute of Technology, Madras. Competed against 15 national teams in an on-site event.",
-          "bullets": [
-            "Awarded Best Embedded System among 15 national teams",
-            "Special Mention for Pod Demonstration â€” Top 3 teams",
-            "Special Mention for Research Blueprint â€” Top 10 teams",
-            "Presented team innovations to jury and a technically proficient audience"
-          ],
-          "tags": [
-            "Embedded Systems",
-            "Hyperloop",
-            "IIT-M",
-            "On-Site"
-          ]
+          "period": "Hack-O-OCTO",
+          "title": "SkillConnect — AI Team Formation Platform",
+          "subtitle": "Top 25 Finalist",
+          "description": "Built an AI-powered platform for intelligent team matching based on skills, interests, and domain expertise using React and Node.js. Designed backend recommendation logic, integrated the database, and deployed a working prototype within hackathon timelines.",
+          "tags": ["Hackathon", "AI", "Team Matching", "React", "Node.js"]
         },
         {
-          "period": "Jul 2025",
-          "title": "Mind's Eye Competition",
-          "subtitle": "Winner â€” TCET",
-          "description": "Secured first place in the Mind's Eye competition held at Thakur College of Engineering & Technology, demonstrating creative problem-solving and technical acumen.",
-          "tags": [
-            "Winner",
-            "TCET"
-          ]
-        },
-        {
-          "period": "Dec 2025",
-          "title": "Hacktimus Hackathon",
-          "subtitle": "Finalist",
-          "description": "Advanced to the finals of the Hacktimus Hackathon, competing against top teams with an innovative solution built under time constraints.",
-          "tags": [
-            "Hackathon",
-            "Finalist"
-          ]
+          "period": "VaultHeist Hackathon",
+          "title": "SeedShare — AgriTech Resource Sharing Platform",
+          "subtitle": "Hackathon Project",
+          "description": "Developed a resource-sharing platform to help farmers share seeds and resources efficiently. Implemented core features for listings, requests, and secure communication between users.",
+          "tags": ["Hackathon", "AgriTech", "Resource Sharing"]
         }
       ]
     },
@@ -449,12 +350,12 @@
         {
           "key": "email",
           "label": "Email",
-          "value": "adityapoojary07@gmail.com"
+          "value": "niharikakhosla20@gmail.com"
         },
         {
           "key": "location",
           "label": "Location",
-          "value": "Mumbai, Maharashtra, India"
+          "value": "Chandigarh, Punjab, India"
         },
         {
           "key": "responseTime",
@@ -463,7 +364,7 @@
         }
       ],
       "form": {
-        "submitEmail": "adityapoojary07@gmail.com",
+        "submitEmail": "niharikakhosla20@gmail.com",
         "subjectPrefix": "Portfolio Contact: ",
         "labels": {
           "firstName": "First Name",

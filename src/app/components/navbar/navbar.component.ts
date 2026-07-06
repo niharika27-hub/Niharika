@@ -9,7 +9,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgForOf } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -18,7 +18,6 @@ import { pageContent } from '../../data/portfolio-data';
 
 type SectionId =
   | 'about'
-  | 'experience'
   | 'projects'
   | 'tech'
   | 'problem-solving'
@@ -28,6 +27,7 @@ type SectionId =
 
 @Component({
   selector: 'app-navbar',
+  imports: [NgForOf],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <header
@@ -46,55 +46,15 @@ type SectionId =
           <img src="assets/images/logo.png" alt="Niharika logo" class="brand-logo-image" />
         </button>
         <nav class="hidden items-center gap-6 lg:flex lg:ml-auto lg:mr-auto">
-          <button
-            class="nav-link"
-            [class.nav-link-active]="activeSection() === 'about'"
-            (click)="scrollToSection('about')"
-          >
-            {{ nav.links[0].label }}
-          </button>
-          <button
-            class="nav-link"
-            [class.nav-link-active]="activeSection() === 'experience'"
-            (click)="scrollToSection('experience')"
-          >
-            {{ nav.links[1].label }}
-          </button>
-          <button
-            class="nav-link"
-            [class.nav-link-active]="activeSection() === 'projects'"
-            (click)="scrollToSection('projects')"
-          >
-            {{ nav.links[2].label }}
-          </button>
-          <button
-            class="nav-link"
-            [class.nav-link-active]="activeSection() === 'tech'"
-            (click)="scrollToSection('tech')"
-          >
-            {{ nav.links[3].label }}
-          </button>
-          <button
-            class="nav-link"
-            [class.nav-link-active]="activeSection() === 'problem-solving'"
-            (click)="scrollToSection('problem-solving')"
-          >
-            {{ nav.links[4].label }}
-          </button>
-          <button
-            class="nav-link"
-            [class.nav-link-active]="activeSection() === 'education'"
-            (click)="scrollToSection('education')"
-          >
-            {{ nav.links[5].label }}
-          </button>
-          <button
-            class="nav-link"
-            [class.nav-link-active]="activeSection() === 'achievements'"
-            (click)="scrollToSection('achievements')"
-          >
-            {{ nav.links[6].label }}
-          </button>
+          <ng-container *ngFor="let link of nav.links">
+            <button
+              class="nav-link"
+              [class.nav-link-active]="activeSection() === link.id"
+              (click)="scrollToSection(link.id)"
+            >
+              {{ link.label }}
+            </button>
+          </ng-container>
         </nav>
 
         <button class="ml-auto nav-cta hidden lg:inline-flex" (click)="scrollToSection('contact')">
@@ -131,27 +91,11 @@ type SectionId =
         [class.mobile-menu-open]="mobileMenuVisible()"
       >
         <nav class="mx-4 mb-4 flex flex-col gap-1 rounded-2xl p-4 mobile-menu-inner">
-          <button class="mobile-link" (click)="scrollToSection('about'); closeMenu()">
-            {{ nav.links[0].label }}
-          </button>
-          <button class="mobile-link" (click)="scrollToSection('experience'); closeMenu()">
-            {{ nav.links[1].label }}
-          </button>
-          <button class="mobile-link" (click)="scrollToSection('projects'); closeMenu()">
-            {{ nav.links[2].label }}
-          </button>
-          <button class="mobile-link" (click)="scrollToSection('tech'); closeMenu()">
-            {{ nav.links[3].label }}
-          </button>
-          <button class="mobile-link" (click)="scrollToSection('problem-solving'); closeMenu()">
-            {{ nav.links[4].label }}
-          </button>
-          <button class="mobile-link" (click)="scrollToSection('education'); closeMenu()">
-            {{ nav.links[5].label }}
-          </button>
-          <button class="mobile-link" (click)="scrollToSection('achievements'); closeMenu()">
-            {{ nav.links[6].label }}
-          </button>
+          <ng-container *ngFor="let link of nav.links">
+            <button class="mobile-link" (click)="scrollToSection(link.id); closeMenu()">
+              {{ link.label }}
+            </button>
+          </ng-container>
           <button class="mobile-link-cta" (click)="scrollToSection('contact'); closeMenu()">
             {{ nav.cta.label }}
           </button>
@@ -349,7 +293,6 @@ export class NavbarComponent implements AfterViewInit {
   private readonly router = inject(Router);
   private readonly sectionIds: SectionId[] = [
     'about',
-    'experience',
     'projects',
     'tech',
     'problem-solving',
@@ -394,7 +337,7 @@ export class NavbarComponent implements AfterViewInit {
     });
   }
 
-  protected scrollToSection(id: SectionId): void {
+  protected scrollToSection(id: string): void {
     if (!isPlatformBrowser(this.platformId)) return;
     const section = document.getElementById(id);
     if (!section) return;
@@ -405,7 +348,11 @@ export class NavbarComponent implements AfterViewInit {
     } else {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    this.activeSection.set(id);
+
+    // Only update activeSection when id matches our known SectionId values
+    if (this.sectionIds.includes(id as SectionId)) {
+      this.activeSection.set(id as SectionId);
+    }
   }
 
   protected toggleMenu(): void {

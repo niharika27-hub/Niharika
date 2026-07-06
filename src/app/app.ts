@@ -24,7 +24,7 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
   imports: [RouterOutlet, NavbarComponent, CursorFollowerComponent, SplashScreenComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrls: ['./app.css'],
 })
 export class App implements OnInit, AfterViewInit {
   private readonly destroyRef = inject(DestroyRef);

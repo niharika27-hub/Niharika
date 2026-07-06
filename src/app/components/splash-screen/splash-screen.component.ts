@@ -23,7 +23,7 @@ interface SplashLetter {
   imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './splash-screen.component.html',
-  styleUrl: './splash-screen.component.css',
+  styleUrls: ['./splash-screen.component.css'],
 })
 export class SplashScreenComponent implements OnInit, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
